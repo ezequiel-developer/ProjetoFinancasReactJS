@@ -14,10 +14,10 @@ function App() {
         <div className='m-4'>
           <Routes>
             <Route path='/ProjetoFinancasReactJS/' element={<Dashboard />} />
-            <Route path='/receitas' element={<Receitas />} />
-            <Route path='/orcamentos' element={<Orcamentos />} />
-            <Route path='/relatorios' element={<Relatorios />} />
-            <Route path='/despesas' element={<Despesas />} />
+            <Route path='ProjetoFinancasReactJS/receitas' element={<Receitas />} />
+            <Route path='ProjetoFinancasReactJS/orcamentos' element={<Orcamentos />} />
+            <Route path='ProjetoFinancasReactJS/relatorios' element={<Relatorios />} />
+            <Route path='ProjetoFinancasReactJS/despesas' element={<Despesas />} />
           </Routes>
         </div>
       </FinancasProvider>
