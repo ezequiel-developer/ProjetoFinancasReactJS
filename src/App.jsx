@@ -13,7 +13,7 @@ function App() {
       <FinancasProvider> {/* Envolva o conteúdo do Router com o FinancasProvider */}
         <div className='m-4'>
           <Routes>
-            <Route path='/' element={<Dashboard />} />
+            <Route path='/ProjetoFinancasReactJS/' element={<Dashboard />} />
             <Route path='/receitas' element={<Receitas />} />
             <Route path='/orcamentos' element={<Orcamentos />} />
             <Route path='/relatorios' element={<Relatorios />} />
