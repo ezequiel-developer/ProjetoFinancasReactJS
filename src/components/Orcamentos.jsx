@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { FaArrowLeft, FaCheckCircle, FaDollarSign, FaTimes } from 'react-icons/fa';
+import { FaCalendarAlt } from 'react-icons/fa'; // Importa o ícone de calendário
+
 
 
 import { Link } from 'react-router-dom';
@@ -8,6 +10,8 @@ import { FinancasContext } from '../contexts/FinancasContext';
 import { v4 as uuidv4 } from 'uuid';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import OrcamentoPDF from './OrcamentoPDF';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Orcamentos = () => {
@@ -18,8 +22,10 @@ const Orcamentos = () => {
     const [descricao, setDescricao] = useState('');
     const [valor, setValor] = useState('');
     const [preenchido, setPreenchido] = useState(false);
+    const [itens, setItens] = useState([]);
 
-    const { adicionarOrcamento, orcamentos, itens = [], setItens, formatDate, formatCurrency, mudarStatusOrcamento, getStatusClass } = useContext(FinancasContext);
+
+    const { adicionarOrcamento, orcamentos, formatDate, formatCurrency, mudarStatusOrcamento, getStatusClass } = useContext(FinancasContext);
 
     const adicionarItem = () => {
         if (produto && descricao && valor) {
@@ -35,7 +41,8 @@ const Orcamentos = () => {
             setValor('');
             setPreenchido(true);
         } else {
-            alert('Preencha todos os campos para adicionar um item.');
+            toast.error('Preencha todos os campos para adicionar um item.')
+
         }
     };
 
@@ -59,7 +66,7 @@ const Orcamentos = () => {
             setTelefone('');
             setItens([]);
         } else {
-            alert('Preencha os dados do cliente e adicione pelo menos um item.');
+            toast.error('Preencha os dados do cliente e adicione pelo menos um item.');
         }
     };
 
@@ -92,13 +99,18 @@ const Orcamentos = () => {
 
             <div className='mt-20'>
                 <form id='orcamentos-form' className='flex flex-col gap-2'>
-                    <input
-                        type="date"
-                        onChange={(e) => setData(e.target.value)}
-                        value={data}
-                        className={`${preenchido ? 'bg-gray-400 cursor-not-allowed text-gray-500' : 'bg-transparent'} text-white text-2xl p-1 rounded-lg border-gray-500 border-2`}
-                        disabled={preenchido}
-                    />
+                    <div className='relative'>
+                        <input
+                            type="date"
+                            onChange={(e) => setData(e.target.value)}
+                            value={data}
+                            className='text-white w-full text-2xl p-1 pl-12 rounded-lg bg-transparent border-gray-500 border-2'
+                        />
+                        <FaCalendarAlt
+                            className='absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500'
+                            size={24}
+                        />
+                    </div>
 
                     <input
                         type="text"
@@ -195,7 +207,7 @@ const Orcamentos = () => {
                                     fileName="orcamento.pdf"
                                     className='bg-blue-500 px-4 py-2'
                                 >
-                                    {({ loading }) => (loading ? 'Gerando PDF...' : 'Baixar PDF') }
+                                    {({ loading }) => (loading ? 'Gerando PDF...' : 'Baixar PDF')}
                                 </PDFDownloadLink>
 
 

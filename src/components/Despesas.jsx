@@ -3,6 +3,10 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom'; // Importa o componente Link
 import { FinancasContext } from '../contexts/FinancasContext';
 import { parse, v4 as uuidv4 } from 'uuid';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { FaCalendarAlt } from 'react-icons/fa'; // Importa o ícone de calendário
+
 
 const Despesas = () => {
 
@@ -15,20 +19,27 @@ const Despesas = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('Despesas: ', data, categoria, descricao, valor)
 
-        adicionarDespesa({
-            id: uuidv4(),
-            categoria,
-            descricao,
-            valor: parseFloat(valor)
-        })
-        // limpa os campos
+        if (data !== '' && categoria !== '' && descricao !== '' && valor !== '') {
 
-        setData('')
-        setCategoria('')
-        setDescricao('')
-        setValor('')
+            console.log('Despesas: ', data, categoria, descricao, valor)
+
+            adicionarDespesa({
+                id: uuidv4(),
+                categoria,
+                descricao,
+                valor: parseFloat(valor)
+            })
+            // limpa os campos
+
+            setData('')
+            setCategoria('')
+            setDescricao('')
+            setValor('')
+        } else {
+            toast.error('Por favor, preencha todos os campos.');
+        }
+
     }
 
     return (
@@ -61,12 +72,18 @@ const Despesas = () => {
                     onSubmit={handleSubmit}
                     className='flex flex-col gap-2'>
 
-                    <input
-                        type="date"
-                        onChange={(e) => setData(e.target.value)}
-                        value={data}
-                        className='text-white text-2xl p-1 rounded-lg bg-transparent border-gray-500 border-2'
-                    />
+                    <div className='relative'>
+                        <input
+                            type="date"
+                            onChange={(e) => setData(e.target.value)}
+                            value={data}
+                            className='text-white w-full text-2xl p-1 pl-12 rounded-lg bg-transparent border-gray-500 border-2'
+                        />
+                        <FaCalendarAlt
+                            className='absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500'
+                            size={24}
+                        />
+                    </div>
 
                     <select
                         onChange={(e) => setCategoria(e.target.value)}
@@ -101,7 +118,7 @@ const Despesas = () => {
             <div className='mt-10 border-2 border-red-500 p-4'>
                 {despesas.length > 0 ? (
                     despesas.map((despesa) => (
-                        <div key={despesa.id} className='mb-8 p-2 border-b-4 border-gray-300'>
+                        <div key={despesa.id} className='mb-8 p-2 border-b-4 border-gray-300 relative'>
                             <p className='text-xl'>Data: {formatDate(despesa.data)}</p>
                             <h3 className='text-xl '> Categoria: {despesa.categoria}</h3>
                             <p className='text-xl'>Descrição: {despesa.descricao}</p>
@@ -109,7 +126,8 @@ const Despesas = () => {
 
                             <div>
                                 <button
-                                    onClick={() => removerDespesa(despesa.id)}
+                                    onClick={() => removerReceita(receita.id)}
+                                    className='bg-red-500 px-4 py-2 rounded-lg font-semibold absolute right-0 bottom-2'
                                 >
                                     deletar
                                 </button>
