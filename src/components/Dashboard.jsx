@@ -36,7 +36,7 @@ const Dashboard = () => {
 
             <div className='flex justify-around mt-4'>
                 <div className='text-center flex flex-col items-center'>
-                    <Link to='/receitas'>
+                    <Link to='/ProjetoFinancasReactJS/receitas'>
                         <FaDollarSign className='text-4xl text-black mb-2 bg-green-500 rounded-full' />
                     </Link>
                     <p className='text-white text-lg'>Receitas</p>
