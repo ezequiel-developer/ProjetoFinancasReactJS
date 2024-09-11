@@ -39,28 +39,28 @@ const Dashboard = () => {
             <div className='fixed bottom-0 left-0 w-full '>
                 <div className='flex justify-around'>
                     <div className='text-center flex flex-col items-center'>
-                        <Link to='/receitas'>
+                        <Link to='/ProjetoFinancasReactJS/receitas'>
                             <FaDollarSign className='text-4xl text-black mb-2 bg-green-500 rounded-full p-2' />
                         </Link>
                         <p className='text-white text-lg'>Receitas</p>
                     </div>
 
                     <div className='text-center flex flex-col items-center'>
-                        <Link to='/orcamentos'>
+                        <Link to='/ProjetoFinancasReactJS/orcamentos'>
                             <FaFile className='text-4xl text-blue-500 mb-2' />
                         </Link>
                         <p className='text-white text-lg'>Orçamentos</p>
                     </div>
 
                     <div className='text-center flex flex-col items-center'>
-                        <Link to='/relatorios'>
+                        <Link to='/ProjetoFinancasReactJS/relatorios'>
                             <FaChartBar className='text-4xl text-blue-500 mb-2' />
                         </Link>
                         <p className='text-white text-lg'>Relatórios</p>
                     </div>
 
                     <div className='text-center flex flex-col items-center'>
-                        <Link to='/despesas'>
+                        <Link to='/ProjetoFinancasReactJS/despesas'>
                             <FaArrowDown className='text-4xl text-red-500 mb-2' />
                         </Link>
                         <p className='text-white text-lg'>Despesas</p>
