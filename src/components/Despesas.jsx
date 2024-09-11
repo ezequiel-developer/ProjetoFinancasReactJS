@@ -47,7 +47,7 @@ const Despesas = () => {
 
             <header className='fixed top-0 left-0 w-full flex justify-around items-center shadow-black shadow-sm h-20 text-white z-50'>
                 <div>
-                    <Link to='/' className='hover:text-gray-400'>
+                    <Link to='/ProjetoFinancasReactJS' className='hover:text-gray-400'>
                         <FaArrowLeft size={36} />
                     </Link>
                 </div>

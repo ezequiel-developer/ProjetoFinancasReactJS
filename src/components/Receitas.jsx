@@ -47,7 +47,7 @@ const Receitas = () => {
         <div className='flex flex-col h-screen'>
             <header className='fixed top-0 left-0 w-full flex justify-around items-center shadow-black shadow-sm h-20 text-white bg-[#181818] z-50'>
                 <div>
-                    <Link to='/' className='hover:text-gray-400'>
+                    <Link to='/ProjetoFinancasReactJS' className='hover:text-gray-400'>
                         <FaArrowLeft size={36} />
                     </Link>
                 </div>
