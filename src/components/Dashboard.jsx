@@ -9,7 +9,7 @@ const Dashboard = () => {
 
     return (
         <div className='flex flex-col h-screen overflow-hidden'>
-            <div className='flex flex-col flex-1 p-4 box-border'>
+            <div className='flex flex-col flex-1 p-2 box-border'>
                 <div className='bg-[#343434] p-2 text-center text-xl rounded-xl mb-4'>
                     <h2 className='font-semibold'>Saldo Atual</h2>
                     <p className={`${saldoAtual > 0 ? 'text-green-500' : saldoAtual < 0 ? 'text-red-500' : 'text-white'} text-2xl font-bold`}>

@@ -42,7 +42,7 @@ const Despesas = () => {
     }
 
     return (
-        <div className='flex flex-col h-screen'>
+        <div className='flex flex-col h-screen p-2'>
 
             <header className='fixed top-0 left-0 w-full flex justify-around items-center shadow-black shadow-sm h-20 text-white z-50'>
                 <div>
