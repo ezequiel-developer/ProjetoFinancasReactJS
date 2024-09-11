@@ -1,9 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { FaArrowLeft, FaCheckCircle, FaDollarSign, FaTimes } from 'react-icons/fa';
-import { FaCalendarAlt } from 'react-icons/fa'; // Importa o ícone de calendário
-
-
-
+import { FaCalendarAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import InputMask from 'react-input-mask';
 import { FinancasContext } from '../contexts/FinancasContext';
@@ -25,10 +22,11 @@ const Orcamentos = () => {
     const [itens, setItens] = useState([]);
 
 
-    const { adicionarOrcamento, orcamentos, formatDate, formatCurrency, mudarStatusOrcamento, getStatusClass } = useContext(FinancasContext);
+    const { adicionarOrcamento, orcamentos, formatDate, formatCurrency, mudarStatusOrcamento, getStatusClass, removerOrcamento } = useContext(FinancasContext);
 
     const adicionarItem = () => {
-        if (produto && descricao && valor) {
+
+        if (produto !== '' && descricao !== '' && valor !== '') {
             setItens([...itens, {
                 data,
                 id: uuidv4(),
@@ -60,11 +58,16 @@ const Orcamentos = () => {
                 telefone,
                 itens,
             });
-
-            setPreenchido(false)
+            // Resetar todos os campos
             setCliente('');
             setTelefone('');
             setItens([]);
+            setProduto('');
+            setDescricao('');
+            setValor('');
+            setData('');
+
+            setPreenchido(false);  // Reseta o estado de preenchido
         } else {
             toast.error('Preencha os dados do cliente e adicione pelo menos um item.');
         }
@@ -98,67 +101,78 @@ const Orcamentos = () => {
             </header>
 
             <div className='mt-20'>
-                <form id='orcamentos-form' className='flex flex-col gap-2'>
-                    <div className='relative'>
+                <form id='orcamentos-form' className='flex flex-col md:flex-row gap-6 items-center'>
+
+                <div className='flex flex-col md:flex-row w-full gap-2'>
+
+                        <div className='relative'>
+                            <input
+                                type="date"
+                                onChange={(e) => setData(e.target.value)}
+                                value={data}
+                                className='text-white w-full text-2xl p-1 pl-12 rounded-lg bg-transparent border-gray-500 border-2'
+                            />
+                            <FaCalendarAlt
+                                className='absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500'
+                                size={24}
+                            />
+                        </div>
+
                         <input
-                            type="date"
-                            onChange={(e) => setData(e.target.value)}
-                            value={data}
-                            className='text-white w-full text-2xl p-1 pl-12 rounded-lg bg-transparent border-gray-500 border-2'
+                            type="text"
+                            placeholder='Nome do Cliente'
+                            onChange={(e) => setCliente(e.target.value)}
+                            value={cliente}
+                            className={`${preenchido ? 'bg-gray-400 cursor-not-allowed text-gray-500' : 'bg-transparent'} text-white text-2xl p-1 rounded-lg border-gray-500 border-2 w-full`}
+                            disabled={preenchido}
                         />
-                        <FaCalendarAlt
-                            className='absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500'
-                            size={24}
-                        />
+
+                        <InputMask
+                            mask="(99) 99999-9999"
+                            value={telefone}
+                            onChange={(e) => setTelefone(e.target.value)}
+                            disabled={preenchido}
+                            className={`${preenchido ? 'bg-gray-400 cursor-not-allowed text-gray-500' : 'bg-transparent'} text-white text-2xl p-1 rounded-lg border-gray-500 w-full border-2`}
+                        >
+                            {(inputProps) => <input {...inputProps} type="text" placeholder='Telefone' />}
+                        </InputMask>
+
                     </div>
 
-                    <input
-                        type="text"
-                        placeholder='Nome do Cliente'
-                        onChange={(e) => setCliente(e.target.value)}
-                        value={cliente}
-                        className={`${preenchido ? 'bg-gray-400 cursor-not-allowed text-gray-500' : 'bg-transparent'} text-white text-2xl p-1 rounded-lg border-gray-500 border-2`}
-                        disabled={preenchido}
-                    />
+                    <div className='flex flex-col md:flex-row w-full gap-2'>
 
-                    <InputMask
-                        mask="(99) 99999-9999"
-                        value={telefone}
-                        onChange={(e) => setTelefone(e.target.value)}
-                        disabled={preenchido}
-                        className={`${preenchido ? 'bg-gray-400 cursor-not-allowed text-gray-500' : 'bg-transparent'} text-white text-2xl p-1 rounded-lg border-gray-500 border-2`}
-                    >
-                        {(inputProps) => <input {...inputProps} type="text" placeholder='Telefone' />}
-                    </InputMask>
+                        <select
+                            onChange={(e) => setProduto(e.target.value)}
+                            value={produto}
+                            className='text-black w-full bg-white text-2xl p-1 rounded-lg border-gray-500 border-2'
+                        >
+                            <option value="" disabled>Selecione o produto</option>
+                            <option value="Capota">Capota</option>
+                            <option value="Estofado">Estofado</option>
+                            <option value="Fechamento">Fechamento</option>
+                            <option value="Reparo">Reparo</option>
+                        </select>
 
-                    <select
-                        onChange={(e) => setProduto(e.target.value)}
-                        value={produto}
-                        className='text-black bg-white text-2xl p-1 rounded-lg border-gray-500 border-2'
-                    >
-                        <option value="" disabled>Selecione o produto</option>
-                        <option value="Capota">Capota</option>
-                        <option value="Estofado">Estofado</option>
-                        <option value="Fechamento">Fechamento</option>
-                        <option value="Reparo">Reparo</option>
-                    </select>
+                        <input
+                            type="text"
+                            placeholder='Descrição'
+                            onChange={(e) => setDescricao(e.target.value)}
+                            value={descricao}
+                            className='text-black w-full text-2xl p-1 rounded-lg border-gray-500 border-2'
+                        />
+                        <input
+                            type="number"
+                            placeholder='Valor'
+                            onChange={(e) => setValor(e.target.value)}
+                            value={valor}
+                            className='text-black w-full text-2xl p-1 rounded-lg border-gray-500 border-2'
+                        />
 
-                    <input
-                        type="text"
-                        placeholder='Descrição'
-                        onChange={(e) => setDescricao(e.target.value)}
-                        value={descricao}
-                        className='text-black text-2xl p-1 rounded-lg border-gray-500 border-2'
-                    />
+                    </div>
 
-                    <input
-                        type="number"
-                        placeholder='Valor'
-                        onChange={(e) => setValor(e.target.value)}
-                        value={valor}
-                        className='text-black text-2xl p-1 rounded-lg border-gray-500 border-2'
-                    />
+
                 </form>
+
 
                 <button
                     onClick={adicionarItem}
@@ -193,14 +207,17 @@ const Orcamentos = () => {
             </div>
 
             {/* EXIBIR ORÇAMENTO DEPOIS DE SALVO */}
-            <div>
+
+            <div className='grid grid-cols-1 md:grid-cols-4 md:space-x-4'>
                 {orcamentos.length > 0 && (
                     orcamentos.map((orcamento) => (
-                        <div key={orcamento.id} className={`p-4 text-xl rounded shadow-xl mb-4 ${getStatusClass(orcamento.status)}`}>
-
+                        <div key={orcamento.id} className={`flex flex-col justify-between p-4 text-xl rounded shadow-xl mb-4 ${getStatusClass(orcamento.status)}`} style={{ height: '500px', overflow: 'hidden' }}>
                             <div className='flex justify-between mb-4'>
                                 <button className='bg-yellow-500 px-4 py-2'>Editar</button>
-                                <button className='bg-red-500 px-4 py-2'>Remover</button>
+                                <button 
+                                className='bg-red-500 px-4 py-2'
+                                onClick={()=> removerOrcamento(orcamento.id)}
+                                >Remover</button>
 
                                 <PDFDownloadLink
                                     document={<OrcamentoPDF orcamento={orcamento} formatCurrency={formatCurrency} formatDate={formatDate} />}
@@ -209,22 +226,17 @@ const Orcamentos = () => {
                                 >
                                     {({ loading }) => (loading ? 'Gerando PDF...' : 'Baixar PDF')}
                                 </PDFDownloadLink>
-
-
-
                             </div>
 
                             <div>
-
                                 <p><strong>Data:</strong> {formatDate(orcamento.data)}</p>
-                                <p> <strong>Cliente:</strong> {orcamento.cliente}</p>
-                                <p> <strong>Telefone:</strong> {orcamento.telefone}</p>
-
+                                <p><strong>Cliente:</strong> {orcamento.cliente}</p>
+                                <p><strong>Telefone:</strong> {orcamento.telefone}</p>
                             </div>
 
                             <span className="block border-t-4 my-4 border-black w-full"></span>
 
-                            <div>
+                            <div className='overflow-auto' style={{ maxHeight: '200px' }}>
                                 <h4>Produtos:</h4>
                                 {orcamento.itens.map((item) => (
                                     <ul key={item.id} className='list-disc py-2 pl-6 border-black border-b-4'>
@@ -234,34 +246,30 @@ const Orcamentos = () => {
                                     </ul>
                                 ))}
 
-                                <p className=' text-2xl font-bold mt-4'> Total:  {formatCurrency(orcamento.itens.reduce((acc, item) => acc + item.valor, 0))}</p>
-
-
+                                <p className='text-2xl font-bold mt-4'>Total: {formatCurrency(orcamento.itens.reduce((acc, item) => acc + item.valor, 0))}</p>
                             </div>
 
-                            <div className='flex justify-between mt-4'>
-
+                            <div className='flex justify-between'>
                                 <button onClick={() => mudarStatusOrcamento(orcamento.id, 'Aprovado')} className='text-blue-600 flex flex-col items-center'>
                                     <FaCheckCircle size={30} />
                                     <span className='text-lg font-bold'>aprovado</span>
                                 </button>
-
 
                                 <button onClick={() => mudarStatusOrcamento(orcamento.id, 'Negado')} className='flex text-red-600 flex-col items-center'>
                                     <FaTimes size={30} />
                                     <span className='text-lg font-bold'>Negado</span>
                                 </button>
 
-                                <button onClick={() => mudarStatusOrcamento(orcamento.id, 'Recebido')} className='flex text-green-600  flex-col items-center'>
+                                <button onClick={() => mudarStatusOrcamento(orcamento.id, 'Recebido')} className='flex text-green-600 flex-col items-center'>
                                     <FaDollarSign size={30} />
                                     <span className='text-lg font-bold'>Recebido</span>
                                 </button>
                             </div>
-
                         </div>
                     ))
                 )}
             </div>
+
         </div>
     );
 };

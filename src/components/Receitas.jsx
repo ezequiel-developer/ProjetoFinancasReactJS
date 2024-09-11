@@ -5,7 +5,7 @@ import { FinancasContext } from '../contexts/FinancasContext';
 import { v4 as uuidv4 } from 'uuid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaCalendarAlt } from 'react-icons/fa'; // Importa o ícone de calendário
+import { FaCalendarAlt } from 'react-icons/fa'; 
 
 
 
@@ -18,7 +18,7 @@ const Receitas = () => {
     const { adicionarReceita, receitas, formatCurrency, formatDate, removerReceita } = useContext(FinancasContext);
 
     const handleSubmit = (e) => {
-        e.preventDefault(); // impede comportamento padrão
+        e.preventDefault(); 
 
         if (data !== '' && produto !== '' && descricao !== '' && valor !== '') {
 
@@ -58,8 +58,8 @@ const Receitas = () => {
 
                 <div>
                     <button
-                        type='submit' // Adicionado type='submit'
-                        form='receitas-form' // Adicionado form='receitas-form' para associar o botão ao formulário
+                        type='submit'
+                        form='receitas-form' 
                         className='bg-green-500 text-2xl px-4 py-1 rounded-full text-black font-bold'>
                         Salvar
                     </button>
@@ -68,9 +68,9 @@ const Receitas = () => {
 
             <div className='mt-20'>
                 <form
-                    id='receitas-form' // Adicionado id='receitas-form'
+                    id='receitas-form'
                     onSubmit={handleSubmit}
-                    className='flex flex-col gap-2'>
+                    className='flex flex-col md:flex-row justify-center md:gap-8 gap-2'>
 
                     <div className='relative'>
                         <input

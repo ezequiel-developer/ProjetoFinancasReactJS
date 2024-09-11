@@ -5,13 +5,12 @@ import Orcamentos from './components/Orcamentos';
 import Relatorios from './components/Relatorios';
 import Despesas from './components/Despesas';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { FinancasProvider } from './contexts/FinancasContext'; // Importa o provider
+import { FinancasProvider } from './contexts/FinancasContext'; 
 
 function App() {
   return (
     <Router>
-      <FinancasProvider> {/* Envolva o conteúdo do Router com o FinancasProvider */}
-        <div className='m-4'>
+      <FinancasProvider> 
           <Routes>
             <Route path='/ProjetoFinancasReactJS/' element={<Dashboard />} />
             <Route path='/ProjetoFinancasReactJS/receitas' element={<Receitas />} />
@@ -19,7 +18,6 @@ function App() {
             <Route path='/ProjetoFinancasReactJS/relatorios' element={<Relatorios />} />
             <Route path='/ProjetoFinancasReactJS/despesas' element={<Despesas />} />
           </Routes>
-        </div>
       </FinancasProvider>
     </Router>
   );

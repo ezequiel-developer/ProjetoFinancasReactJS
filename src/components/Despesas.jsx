@@ -30,7 +30,6 @@ const Despesas = () => {
                 descricao,
                 valor: parseFloat(valor)
             })
-            // limpa os campos
 
             setData('')
             setCategoria('')
@@ -58,8 +57,8 @@ const Despesas = () => {
 
                 <div>
                     <button
-                        type='submit' // Adicionado type='submit'
-                        form='despesas-form' // Adicionado form='despesas-form' para associar o botão ao formulário
+                        type='submit' 
+                        form='despesas-form' 
                         className='bg-red-500 text-2xl px-4 py-1 rounded-full text-black font-bold'>
                         Salvar
                     </button>
@@ -68,9 +67,9 @@ const Despesas = () => {
 
             <div className='mt-20'>
                 <form
-                    id='despesas-form' // Adicionado id='despesas-form'
+                    id='despesas-form'
                     onSubmit={handleSubmit}
-                    className='flex flex-col gap-2'>
+                    className='flex flex-col md:flex-row justify-center md:gap-8 gap-2'>
 
                     <div className='relative'>
                         <input
@@ -126,7 +125,7 @@ const Despesas = () => {
 
                             <div>
                                 <button
-                                    onClick={() => removerReceita(receita.id)}
+                                    onClick={() => removerDespesa(despesa.id)}
                                     className='bg-red-500 px-4 py-2 rounded-lg font-semibold absolute right-0 bottom-2'
                                 >
                                     deletar

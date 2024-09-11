@@ -19,43 +19,30 @@ const Relatorios = () => {
                 <div>
                     <h2 className='text-2xl font-bold uppercase'>Relatorios</h2>
                 </div>
-
-
-
-
             </header>
 
             <div className='flex flex-col gap-4 mt-20 pb-4'>
 
-
                 <div className='bg-green-200 p-2 rounded-xl'>
                     <h2 className='text-center text-black uppercase text-2xl font-bold my-4'>Receitas</h2>
 
-                <GraficoReceitas className='text-white' />
-
+                    <GraficoReceitas className='text-white' />
                 </div>
 
                 <div className='bg-red-200 p-2 rounded-xl'>
                     <h2 className='text-center text-black uppercase text-2xl font-bold my-4'>Despesas</h2>
 
-                <GraficoDespesas className='text-white' />
-
+                    <GraficoDespesas className='text-white' />
                 </div>
 
-                
                 <div className='bg-blue-200 p-2 rounded-xl'>
                     <h2 className='text-center text-black uppercase text-2xl font-bold my-4'>Orçamentos</h2>
 
-            <GraficoOrcamentos />
+                    <GraficoOrcamentos />
 
                 </div>
 
-            
-
             </div>
-
-
-
 
         </div>
     );

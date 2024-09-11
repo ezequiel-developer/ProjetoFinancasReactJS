@@ -88,7 +88,7 @@ const OrcamentoPDF = ({ orcamento, formatCurrency, formatDate }) => {
         {/* Header com logo e informações de contato */}
         <View style={styles.header}>
           <Image
-            src="/logo_estofaria.jpg" // Substitua pelo caminho do seu logo
+            src="/logo_estofaria.jpg" 
             style={styles.logo}
           />
           <View style={styles.contactInfo}>

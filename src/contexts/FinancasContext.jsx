@@ -90,6 +90,34 @@ export const FinancasProvider = ({ children }) => {
     });
   };
 
+  const removerOrcamento = (id) => {
+    setOrcamentos((prevOrcamentos) => {
+      // Encontrar o orçamento a ser removido
+      const orcamentoParaRemover = prevOrcamentos.find((orcamento) => orcamento.id === id);
+      if (orcamentoParaRemover) {
+        // Obter os IDs das receitas associadas ao orçamento
+        const receitaIds = orcamentoParaRemover.itens.map((item) => item.id);
+  
+        // Remover as receitas associadas
+        receitaIds.forEach((receitaId) => {
+          removerReceita(receitaId);
+        });
+      }
+  
+      // Atualizar a lista de orçamentos
+      const orcamentosAtualizados = prevOrcamentos.filter((orcamento) => orcamento.id !== id);
+      localStorage.setItem('orcamentos', JSON.stringify(orcamentosAtualizados));
+  
+      // Atualizar as listas de status
+      setOrcamentosAprovados((prev) => prev.filter((orcamento) => orcamento.id !== id));
+      setOrcamentosNegados((prev) => prev.filter((orcamento) => orcamento.id !== id));
+      setOrcamentosRecebidos((prev) => prev.filter((orcamento) => orcamento.id !== id));
+      
+      return orcamentosAtualizados;
+    });
+  };
+  
+
   const mudarStatusOrcamento = (id, novoStatus) => {
     setOrcamentos(prevOrcamentos => {
       const updatedOrcamentos = prevOrcamentos.map(orcamento => {
@@ -185,6 +213,7 @@ export const FinancasProvider = ({ children }) => {
         removerReceita,
         removerDespesa,
         adicionarOrcamento,
+        removerOrcamento,
         orcamentos,
         mudarStatusOrcamento,
         orcamentosNegados,
