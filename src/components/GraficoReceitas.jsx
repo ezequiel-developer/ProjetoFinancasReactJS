@@ -12,10 +12,10 @@ const GraficoReceitas = () => {
   // Agrupar receitas por categorias
   const categorias = {};
   receitas.forEach(receita => {
-    if (!categorias[receita.produto]) {
-      categorias[receita.produto] = 0;
+    if (!categorias[receita.servico]) {
+      categorias[receita.servico] = 0;
     }
-    categorias[receita.produto] += receita.valor;
+    categorias[receita.servico] += receita.valor;
   });
 
   // Ordenar categorias por valor de forma crescente

@@ -15,7 +15,7 @@ const Orcamentos = () => {
     const [data, setData] = useState('');
     const [cliente, setCliente] = useState('');
     const [telefone, setTelefone] = useState('');
-    const [produto, setProduto] = useState('');
+    const [servico, setServico] = useState('');
     const [descricao, setDescricao] = useState('');
     const [valor, setValor] = useState('');
     const [preenchido, setPreenchido] = useState(false);
@@ -26,15 +26,15 @@ const Orcamentos = () => {
 
     const adicionarItem = () => {
 
-        if (produto !== '' && descricao !== '' && valor !== '') {
+        if (servico !== '' && descricao !== '' && valor !== '') {
             setItens([...itens, {
                 data,
                 id: uuidv4(),
-                produto,
+                servico,
                 descricao,
                 valor: parseFloat(valor),
             }]);
-            setProduto('');
+            setServico('');
             setDescricao('');
             setValor('');
             setPreenchido(true);
@@ -62,7 +62,7 @@ const Orcamentos = () => {
             setCliente('');
             setTelefone('');
             setItens([]);
-            setProduto('');
+            setServico('');
             setDescricao('');
             setValor('');
             setData('');
@@ -103,7 +103,7 @@ const Orcamentos = () => {
             <div className='mt-20'>
                 <form id='orcamentos-form' className='flex flex-col md:flex-row gap-6 items-center'>
 
-                <div className='flex flex-col md:flex-row w-full gap-2'>
+                    <div className='flex flex-col md:flex-row w-full gap-2'>
 
                         <div className='relative'>
                             <input
@@ -111,6 +111,7 @@ const Orcamentos = () => {
                                 onChange={(e) => setData(e.target.value)}
                                 value={data}
                                 className='text-white w-full text-2xl p-1 pl-12 rounded-lg bg-transparent border-gray-500 border-2'
+                                disabled={preenchido}
                             />
                             <FaCalendarAlt
                                 className='absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500'
@@ -120,7 +121,7 @@ const Orcamentos = () => {
 
                         <input
                             type="text"
-                            placeholder='Nome do Cliente'
+                            placeholder='Cliente'
                             onChange={(e) => setCliente(e.target.value)}
                             value={cliente}
                             className={`${preenchido ? 'bg-gray-400 cursor-not-allowed text-gray-500' : 'bg-transparent'} text-white text-2xl p-1 rounded-lg border-gray-500 border-2 w-full`}
@@ -142,11 +143,11 @@ const Orcamentos = () => {
                     <div className='flex flex-col md:flex-row w-full gap-2'>
 
                         <select
-                            onChange={(e) => setProduto(e.target.value)}
-                            value={produto}
+                            onChange={(e) => setServico(e.target.value)}
+                            value={servico}
                             className='text-black w-full bg-white text-2xl p-1 rounded-lg border-gray-500 border-2'
                         >
-                            <option value="" disabled>Selecione o produto</option>
+                            <option value="" disabled>Serviço</option>
                             <option value="Capota">Capota</option>
                             <option value="Estofado">Estofado</option>
                             <option value="Fechamento">Fechamento</option>
@@ -195,7 +196,7 @@ const Orcamentos = () => {
 
                         {itens.map((item) => (
                             <div key={item.id}>
-                                <p>Produto: {item.produto}</p>
+                                <p>Serviço: {item.servico}</p>
                                 <p>Descrição: {item.descricao}</p>
                                 <p>Valor: {formatCurrency(item.valor)}</p>
 
@@ -211,22 +212,40 @@ const Orcamentos = () => {
             <div className='grid grid-cols-1 md:grid-cols-4 md:space-x-4'>
                 {orcamentos.length > 0 && (
                     orcamentos.map((orcamento) => (
-                        <div key={orcamento.id} className={`flex flex-col justify-between p-4 text-xl rounded shadow-xl mb-4 ${getStatusClass(orcamento.status)}`} style={{ height: '500px', overflow: 'hidden' }}>
+                        <div key={orcamento.id} className={`shadow-black shadow-sm flex flex-col justify-between p-4 text-xl rounded shadow-xl mb-4 ${getStatusClass(orcamento.status)}`} style={{ height: '500px', overflow: 'hidden' }}>
                             <div className='flex justify-between mb-4'>
-                                <button className='bg-yellow-500 px-4 py-2'>Editar</button>
-                                <button 
-                                className='bg-red-500 px-4 py-2'
-                                onClick={()=> removerOrcamento(orcamento.id)}
-                                >Remover</button>
 
-                                <PDFDownloadLink
-                                    document={<OrcamentoPDF orcamento={orcamento} formatCurrency={formatCurrency} formatDate={formatDate} />}
-                                    fileName="orcamento.pdf"
-                                    className='bg-blue-500 px-4 py-2'
-                                >
-                                    {({ loading }) => (loading ? 'Gerando PDF...' : 'Baixar PDF')}
-                                </PDFDownloadLink>
+                                <div>
+                                    <button className='bg-yellow-500 px-2 py-1 md:px-4 md:py-2'>Editar</button>
+                                </div>
+
+                                <div>
+                                    <button
+                                        className='bg-red-500 px-2 py-1 md:px-4 md:py-2'
+                                        onClick={() => removerOrcamento(orcamento.id)}
+                                    >
+                                        Remover
+                                    </button>
+                                </div>
+
+                                <div>
+                                    <button
+                                        className='bg-blue-500 px-2 py-1 md:px-4 md:py-2'
+                                    >
+                                        <PDFDownloadLink
+                                            document={<OrcamentoPDF orcamento={orcamento} formatCurrency={formatCurrency} formatDate={formatDate} />}
+                                            fileName="orcamento.pdf"
+                                        >
+                                            {({ loading }) => (loading ? 'Gerando PDF...' : 'PDF')}
+                                        </PDFDownloadLink>
+
+                                    </button>
+
+                                </div>
+
+
                             </div>
+
 
                             <div>
                                 <p><strong>Data:</strong> {formatDate(orcamento.data)}</p>
@@ -237,10 +256,10 @@ const Orcamentos = () => {
                             <span className="block border-t-4 my-4 border-black w-full"></span>
 
                             <div className='overflow-auto' style={{ maxHeight: '200px' }}>
-                                <h4>Produtos:</h4>
+                                <h4>Serviço:</h4>
                                 {orcamento.itens.map((item) => (
                                     <ul key={item.id} className='list-disc py-2 pl-6 border-black border-b-4'>
-                                        <li>Produto: {item.produto}</li>
+                                        <li>Serviço: {item.servico}</li>
                                         <li>Descrição: {item.descricao}</li>
                                         <li>Valor: {formatCurrency(item.valor)}</li>
                                     </ul>

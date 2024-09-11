@@ -5,35 +5,35 @@ import { FinancasContext } from '../contexts/FinancasContext';
 import { v4 as uuidv4 } from 'uuid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaCalendarAlt } from 'react-icons/fa'; 
+import { FaCalendarAlt } from 'react-icons/fa';
 
 
 
 const Receitas = () => {
 
     const [data, setData] = useState('');
-    const [produto, setProduto] = useState('');
+    const [servico, setServico] = useState('');
     const [descricao, setDescricao] = useState('');
     const [valor, setValor] = useState('');
     const { adicionarReceita, receitas, formatCurrency, formatDate, removerReceita } = useContext(FinancasContext);
 
     const handleSubmit = (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
 
-        if (data !== '' && produto !== '' && descricao !== '' && valor !== '') {
+        if (data !== '' && servico !== '' && descricao !== '' && valor !== '') {
 
-            console.log('Dados:', data, produto, descricao, valor);
+            console.log('Dados:', data, servico, descricao, valor);
             adicionarReceita({
                 id: uuidv4(),
                 data,
-                produto,
+                servico,
                 descricao,
                 valor: parseFloat(valor)
             })
 
             // Limpar os campos depois de enviar
             setData('')
-            setProduto('')
+            setServico('')
             setDescricao('')
             setValor('')
         } else {
@@ -59,7 +59,7 @@ const Receitas = () => {
                 <div>
                     <button
                         type='submit'
-                        form='receitas-form' 
+                        form='receitas-form'
                         className='bg-green-500 text-2xl px-4 py-1 rounded-full text-black font-bold'>
                         Salvar
                     </button>
@@ -86,11 +86,11 @@ const Receitas = () => {
                     </div>
 
                     <select
-                        onChange={(e) => setProduto(e.target.value)}
-                        value={produto}
+                        onChange={(e) => setServico(e.target.value)}
+                        value={servico}
                         className='text-black bg-white text-2xl p-1 rounded-lg bg-transparent border-gray-500 border-2'
                     >
-                        <option value="" disabled>Selecione o produto</option>
+                        <option value="" disabled>Serviço</option>
                         <option value="Capota">Capota</option>
                         <option value="Estofado">Estofado</option>
                         <option value="Fechamento">Fechamento</option>
@@ -120,7 +120,7 @@ const Receitas = () => {
                     receitas.map((receita) => (
                         <div key={receita.id} className='mb-4 p-2 border-b border-gray-300 relative'>
                             <p className='text-xl'>Data: {formatDate(receita.data)}</p>
-                            <h3 className='text-xl '> Produto: {receita.produto}</h3>
+                            <h3 className='text-xl '> Serviço: {receita.servico}</h3>
                             <p className='text-xl'>Descrição: {receita.descricao}</p>
                             <p className='text-xl font-semibold'>Valor: <strong className='text-green-500'>{formatCurrency(receita.valor)}</strong> </p>
 

@@ -89,12 +89,12 @@ const OrcamentoPDF = ({ orcamento, formatCurrency, formatDate }) => {
         {/* Header com logo e informações de contato */}
         <View style={styles.header}>
           <Image
-  src="https://ezequiel-developer.github.io/ProjetoFinancasReactJS/logo_estofaria.jpg"
-  style={styles.logo}
+            src="https://ezequiel-developer.github.io/ProjetoFinancasReactJS/logo_estofaria.jpg"
+            style={styles.logo}
           />
           <View style={styles.contactInfo}>
-          <Text style={styles.contactText}>Âncora Capotaria & <br /> Estofaria Náutica</Text>
-            
+            <Text style={styles.contactText}>Âncora Capotaria & <br /> Estofaria Náutica</Text>
+
             <Text style={styles.contactText}>Instagram: @estofaria.ancora</Text>
             <Text style={styles.contactText}>WhatsApp: 47 9 9961-4459</Text>
           </View>
@@ -113,7 +113,7 @@ const OrcamentoPDF = ({ orcamento, formatCurrency, formatDate }) => {
           </View>
         </View>
 
-        {/* Produtos */}
+        {/* Serviços */}
         <View style={styles.section}>
           <Text style={styles.title}>Serviços</Text>
           <View style={styles.table}>
@@ -124,7 +124,7 @@ const OrcamentoPDF = ({ orcamento, formatCurrency, formatDate }) => {
             </View>
             {orcamento.itens.map((item) => (
               <View key={item.id} style={styles.tableRow}>
-                <Text style={styles.tableCell}>{item.produto}</Text>
+                <Text style={styles.tableCell}>{item.servico}</Text>
                 <Text style={styles.tableCell}>{item.descricao}</Text>
                 <Text style={styles.tableCell}>{formatCurrency(item.valor)}</Text>
               </View>
