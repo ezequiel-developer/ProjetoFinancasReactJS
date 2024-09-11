@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Page, Text, View, Document, StyleSheet, Image } from '@react-pdf/renderer';
 
+
 const styles = StyleSheet.create({
   page: {
     padding: 20,
@@ -88,8 +89,8 @@ const OrcamentoPDF = ({ orcamento, formatCurrency, formatDate }) => {
         {/* Header com logo e informações de contato */}
         <View style={styles.header}>
           <Image
-            src="/logo_estofaria.jpg" 
-            style={styles.logo}
+  src="https://ezequiel-developer.github.io/ProjetoFinancasReactJS/logo_estofaria.jpg"
+  style={styles.logo}
           />
           <View style={styles.contactInfo}>
           <Text style={styles.contactText}>Âncora Capotaria & <br /> Estofaria Náutica</Text>

@@ -20,7 +20,7 @@ const Relatorios = () => {
                 </div>
             </header>
 
-            <main className='flex flex-col md:flex-row gap-4 mt-24 pt-4 pb-4'>
+            <div className='flex flex-col md:flex-row gap-4 mt-20 pt-4 pb-4'>
                 <div className='bg-green-200 flex-1 p-4 rounded-xl'>
                     <h2 className='text-center text-black uppercase text-2xl font-bold mb-4'>Receitas</h2>
                     <GraficoReceitas className='text-white' />
@@ -35,7 +35,7 @@ const Relatorios = () => {
                     <h2 className='text-center text-black uppercase text-2xl font-bold mb-4'>Orçamentos</h2>
                     <GraficoOrcamentos />
                 </div>
-            </main>
+            </div>
         </div>
     );
 }
