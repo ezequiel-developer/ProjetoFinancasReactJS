@@ -26,7 +26,7 @@ const Orcamentos = () => {
 
     const adicionarItem = () => {
 
-        if (servico !== '' && descricao !== '' && valor !== '') {
+        if (data !== '' && servico !== '' && descricao !== '' && valor !== '') {
             setItens([...itens, {
                 data,
                 id: uuidv4(),

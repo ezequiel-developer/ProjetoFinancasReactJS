@@ -139,7 +139,7 @@ export const FinancasProvider = ({ children }) => {
                 adicionarReceita({
                   id: item.id,
                   data: formatDate(orcamento.data),
-                  produto: item.produto,
+                  servico: item.servico,
                   descricao: item.descricao,
                   valor: item.valor,
                   cliente: orcamento.cliente,
