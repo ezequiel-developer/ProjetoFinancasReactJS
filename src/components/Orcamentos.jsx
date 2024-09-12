@@ -209,11 +209,11 @@ const Orcamentos = () => {
 
             {/* EXIBIR ORÇAMENTO DEPOIS DE SALVO */}
 
-            <div className='mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:space-x-4'>
+            <div className='mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 '>
                 {orcamentos.length > 0 && (
                     orcamentos.map((orcamento) => (
-                        <div key={orcamento.id} className={`shadow-black shadow-sm flex flex-col justify-between p-4 text-xl rounded shadow-xl mb-4 ${getStatusClass(orcamento.status)}`} style={{ height: '500px', overflow: 'hidden' }}>
-                            <div className='flex justify-between mb-4'>
+                        <div key={orcamento.id} className={`shadow-black shadow-sm flex flex-col justify-between p-2 text-xl rounded  mb-4 ${getStatusClass(orcamento.status)}`} style={{ height: '500px', overflow: 'hidden' }}>
+                            <div className='flex justify-between '>
 
                                 <div>
                                     <button className='bg-yellow-500 px-2 py-1 md:px-4 md:py-2'>Editar</button>
@@ -253,7 +253,7 @@ const Orcamentos = () => {
                                 <p><strong>Telefone:</strong> {orcamento.telefone}</p>
                             </div>
 
-                            <span className="block border-t-4 my-4 border-black w-full"></span>
+                            <span className="block border-t-4 border-black w-full"></span>
 
                             <div className='overflow-auto' style={{ maxHeight: '200px' }}>
                                 <h4>Serviço:</h4>
