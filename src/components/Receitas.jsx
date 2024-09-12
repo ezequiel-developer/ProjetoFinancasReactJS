@@ -70,48 +70,56 @@ const Receitas = () => {
                 <form
                     id='receitas-form'
                     onSubmit={handleSubmit}
-                    className='flex flex-col md:flex-row justify-center md:gap-8 gap-2'>
+                    className='flex flex-col md:flex-row gap-6 items-center'>
 
-                    <div className='relative'>
-                        <input
-                            type="date"
-                            onChange={(e) => setData(e.target.value)}
-                            value={data}
-                            className='text-white w-full text-2xl p-1 pl-12 rounded-lg bg-transparent border-gray-500 border-2'
-                        />
-                        <FaCalendarAlt
-                            className='absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500'
-                            size={24}
-                        />
+                    <div className='flex flex-col  w-full gap-2'>
+                        <div className='relative'>
+                            <input
+                                type="date"
+                                onChange={(e) => setData(e.target.value)}
+                                value={data}
+                                className='text-white w-full text-2xl p-1 pl-12 rounded-lg bg-transparent border-gray-500 border-2'
+                            />
+                            <FaCalendarAlt
+                                className='absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500'
+                                size={24}
+                            />
+                        </div>
+
+                        <select
+                            onChange={(e) => setServico(e.target.value)}
+                            value={servico}
+                            className='text-black bg-white text-2xl p-1 rounded-lg bg-transparent border-gray-500 border-2'
+                        >
+                            <option value="" disabled>Serviço</option>
+                            <option value="Capota">Capota</option>
+                            <option value="Estofado">Estofado</option>
+                            <option value="Fechamento">Fechamento</option>
+                            <option value="Reparo">Reparo</option>
+                        </select>
+
                     </div>
 
-                    <select
-                        onChange={(e) => setServico(e.target.value)}
-                        value={servico}
-                        className='text-black bg-white text-2xl p-1 rounded-lg bg-transparent border-gray-500 border-2'
-                    >
-                        <option value="" disabled>Serviço</option>
-                        <option value="Capota">Capota</option>
-                        <option value="Estofado">Estofado</option>
-                        <option value="Fechamento">Fechamento</option>
-                        <option value="Reparo">Reparo</option>
-                    </select>
+                    <div className='flex flex-col  w-full gap-2'>
 
-                    <input
-                        type="text"
-                        placeholder='Descrição'
-                        onChange={(e) => setDescricao(e.target.value)}
-                        value={descricao}
-                        className='text-white text-2xl p-1 rounded-lg bg-transparent border-gray-500 border-2'
-                    />
 
-                    <input
-                        type="number"
-                        placeholder='Valor'
-                        onChange={(e) => setValor(e.target.value)}
-                        value={valor}
-                        className='text-white text-2xl p-1 rounded-lg bg-transparent border-gray-500 border-2'
-                    />
+                        <input
+                            type="text"
+                            placeholder='Descrição'
+                            onChange={(e) => setDescricao(e.target.value)}
+                            value={descricao}
+                            className='text-white text-2xl p-1 rounded-lg bg-transparent border-gray-500 border-2'
+                        />
+
+                        <input
+                            type="number"
+                            placeholder='Valor'
+                            onChange={(e) => setValor(e.target.value)}
+                            value={valor}
+                            className='text-white text-2xl p-1 rounded-lg bg-transparent border-gray-500 border-2'
+                        />
+
+                    </div>
                 </form>
             </div>
 

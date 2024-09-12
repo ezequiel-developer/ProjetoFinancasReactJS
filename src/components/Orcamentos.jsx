@@ -103,7 +103,7 @@ const Orcamentos = () => {
             <div className='mt-20'>
                 <form id='orcamentos-form' className='flex flex-col md:flex-row gap-6 items-center'>
 
-                    <div className='flex flex-col md:flex-row w-full gap-2'>
+                    <div className='flex flex-col w-full gap-2'>
 
                         <div className='relative'>
                             <input
@@ -140,7 +140,7 @@ const Orcamentos = () => {
 
                     </div>
 
-                    <div className='flex flex-col md:flex-row w-full gap-2'>
+                    <div className='flex flex-col w-full gap-2'>
 
                         <select
                             onChange={(e) => setServico(e.target.value)}
@@ -209,7 +209,7 @@ const Orcamentos = () => {
 
             {/* EXIBIR ORÇAMENTO DEPOIS DE SALVO */}
 
-            <div className='grid grid-cols-1 md:grid-cols-4 md:space-x-4'>
+            <div className='mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:space-x-4'>
                 {orcamentos.length > 0 && (
                     orcamentos.map((orcamento) => (
                         <div key={orcamento.id} className={`shadow-black shadow-sm flex flex-col justify-between p-4 text-xl rounded shadow-xl mb-4 ${getStatusClass(orcamento.status)}`} style={{ height: '500px', overflow: 'hidden' }}>

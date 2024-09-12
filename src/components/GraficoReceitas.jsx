@@ -48,73 +48,77 @@ const GraficoReceitas = () => {
   };
 
   return (
-    <div>
-      <Bar
-        data={dadosGrafico}
-        options={{
-          responsive: true,
-          plugins: {
-            legend: {
-              display: true, // Exibe a legenda
-              position: 'top',
-              labels: {
-                font: {
-                  size: 18, // Ajuste o tamanho da fonte da legenda aqui
-                  color: 'white', // Cor da fonte da legenda
+    <div className='bg-[#D1D5DB] shadow-black shadow-lg border-4 p-4 rounded-xl  w-full'>
+      <h2 className='text-center text-black uppercase text-2xl font-bold mb-4'>Receitas</h2>
+      <div className='w-full h-28 md:h-80 lg:h-48 xl:h-32'> {/* Ajuste a altura conforme necessário */}
+        <Bar
+          data={dadosGrafico}
+          options={{
+            responsive: true,
+            maintainAspectRatio: false, // Permite que o gráfico se ajuste ao contêiner
+            plugins: {
+              legend: {
+                display: true, // Exibe a legenda
+                position: 'top',
+                labels: {
+                  font: {
+                    size: 18, // Ajuste o tamanho da fonte da legenda aqui
+                    color: 'white', // Cor da fonte da legenda
+                  },
+                  generateLabels: (chart) => {
+                    const { datasets } = chart.data;
+                    return datasets[0].backgroundColor.map((color, index) => {
+                      return {
+                        text: chart.data.labels[index],
+                        fillStyle: color,
+                        strokeStyle: color,
+                        lineWidth: 2,
+                      };
+                    });
+                  },
                 },
-                generateLabels: (chart) => {
-                  const { datasets } = chart.data;
-                  return datasets[0].backgroundColor.map((color, index) => {
-                    return {
-                      text: chart.data.labels[index],
-                      fillStyle: color,
-                      strokeStyle: color,
-                      lineWidth: 2,
-                    };
-                  });
-                },
-              },
-              padding: {
-                bottom: 40, // Margem inferior da legenda
-              },
-            },
-            tooltip: {
-              callbacks: {
-                label: (context) => {
-                  return `${context.raw.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+                padding: {
+                  bottom: 40, // Margem inferior da legenda
                 },
               },
-              bodyFont: {
-                size: 18, // Ajuste o tamanho da fonte do corpo do tooltip aqui
-                color: 'white', // Cor da fonte do corpo do tooltip
-              },
-              titleFont: {
-                size: 18, // Ajuste o tamanho da fonte do título do tooltip aqui
-                color: 'white', // Cor da fonte do título do tooltip
-              },
-            },
-          },
-          scales: {
-            x: {
-              ticks: {
-                display: false, // Oculta as labels do eixo X
-                font: {
-                  size: 18, // Ajuste o tamanho da fonte do eixo X aqui
-                  color: 'white', // Cor da fonte do eixo X
+              tooltip: {
+                callbacks: {
+                  label: (context) => {
+                    return `${context.raw.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+                  },
+                },
+                bodyFont: {
+                  size: 18, // Ajuste o tamanho da fonte do corpo do tooltip aqui
+                  color: 'white', // Cor da fonte do corpo do tooltip
+                },
+                titleFont: {
+                  size: 18, // Ajuste o tamanho da fonte do título do tooltip aqui
+                  color: 'white', // Cor da fonte do título do tooltip
                 },
               },
             },
-            y: {
-              ticks: {
-                font: {
-                  size: 20, // Ajuste o tamanho da fonte do eixo Y aqui
-                  color: 'white', // Cor da fonte do eixo Y
+            scales: {
+              x: {
+                ticks: {
+                  display: false, // Oculta as labels do eixo X
+                  font: {
+                    size: 18, // Ajuste o tamanho da fonte do eixo X aqui
+                    color: 'white', // Cor da fonte do eixo X
+                  },
+                },
+              },
+              y: {
+                ticks: {
+                  font: {
+                    size: 20, // Ajuste o tamanho da fonte do eixo Y aqui
+                    color: 'white', // Cor da fonte do eixo Y
+                  },
                 },
               },
             },
-          },
-        }}
-      />
+          }}
+        />
+      </div>
     </div>
   );
 };
