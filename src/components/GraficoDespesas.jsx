@@ -48,22 +48,22 @@ const GraficoDespesas = () => {
   };
 
   return (
-    <div className='bg-[#D1D5DB] shadow-black shadow-lg border-4 p-4 rounded-xl w-full'>
-      <h2 className='text-center text-black uppercase text-2xl font-bold mb-4'>Despesas</h2> {/* Corrigido para "Despesas" */}
-      <div className='w-full h-28 md:h-80 lg:h-48 xl:h-32'> {/* Ajuste a altura conforme necessário */}
+    <div className='bg-[#D1D5DB] shadow-black shadow-lg border-4 p-4 rounded-xl w-full' style={{ marginTop: '20px' }}>
+      <h2 className='text-center text-black uppercase text-2xl font-bold mb-4'>Despesas</h2>
+      <div className='w-full h-72 md:h-80 lg:h-48 xl:h-32'>
         <Bar
           data={dadosGrafico}
           options={{
             responsive: true,
-            maintainAspectRatio: false, // Permite que o gráfico se ajuste ao contêiner
+            maintainAspectRatio: false,
             plugins: {
               legend: {
-                display: true, // Exibe a legenda
+                display: true,
                 position: 'top',
                 labels: {
                   font: {
-                    size: 18, // Ajuste o tamanho da fonte da legenda aqui
-                    color: 'white', // Cor da fonte da legenda
+                    size: 14, // Reduzido para criar mais espaço
+                    color: 'white',
                   },
                   generateLabels: (chart) => {
                     const { datasets } = chart.data;
@@ -78,7 +78,7 @@ const GraficoDespesas = () => {
                   },
                 },
                 padding: {
-                  bottom: 40, // Margem inferior da legenda
+                  top: 30, // Ajuste para aumentar a margem superior da legenda
                 },
               },
               tooltip: {
@@ -88,30 +88,30 @@ const GraficoDespesas = () => {
                   },
                 },
                 bodyFont: {
-                  size: 18, // Ajuste o tamanho da fonte do corpo do tooltip aqui
-                  color: 'white', // Cor da fonte do corpo do tooltip
+                  size: 18,
+                  color: 'white',
                 },
                 titleFont: {
-                  size: 18, // Ajuste o tamanho da fonte do título do tooltip aqui
-                  color: 'white', // Cor da fonte do título do tooltip
+                  size: 18,
+                  color: 'white',
                 },
               },
             },
             scales: {
               x: {
                 ticks: {
-                  display: false, // Oculta as labels do eixo X
+                  display: false,
                   font: {
-                    size: 18, // Ajuste o tamanho da fonte do eixo X aqui
-                    color: 'white', // Cor da fonte do eixo X
+                    size: 18,
+                    color: 'white',
                   },
                 },
               },
               y: {
                 ticks: {
                   font: {
-                    size: 20, // Ajuste o tamanho da fonte do eixo Y aqui
-                    color: 'white', // Cor da fonte do eixo Y
+                    size: 20,
+                    color: 'white',
                   },
                 },
               },

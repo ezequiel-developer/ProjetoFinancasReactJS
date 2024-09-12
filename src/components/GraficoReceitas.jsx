@@ -50,7 +50,7 @@ const GraficoReceitas = () => {
   return (
     <div className='bg-[#D1D5DB] shadow-black shadow-lg border-4 p-4 rounded-xl  w-full'>
       <h2 className='text-center text-black uppercase text-2xl font-bold mb-4'>Receitas</h2>
-      <div className='w-full h-28 md:h-80 lg:h-48 xl:h-32'> {/* Ajuste a altura conforme necessário */}
+      <div className='w-full h-72  md:h-80 lg:h-48 xl:h-32'> {/* Ajuste a altura conforme necessário */}
         <Bar
           data={dadosGrafico}
           options={{
