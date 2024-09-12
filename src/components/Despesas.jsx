@@ -25,6 +25,7 @@ const Despesas = () => {
             console.log('Despesas: ', data, categoria, descricao, valor)
 
             adicionarDespesa({
+                data,
                 id: uuidv4(),
                 categoria,
                 descricao,
