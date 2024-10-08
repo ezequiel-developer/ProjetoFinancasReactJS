@@ -152,6 +152,8 @@ const Orcamentos = () => {
                             <option value="Estofado">Estofado</option>
                             <option value="Fechamento">Fechamento</option>
                             <option value="Reparo">Reparo</option>
+                            <option value="Forração">Forração</option>
+                            <option value="Outros">Outros</option>
                         </select>
 
                         <input
